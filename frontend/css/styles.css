@@ -1,0 +1,60 @@
+#chart-container {
+    width: 80%;
+    height: 60vh; /* или сколько нужно */
+    margin: 0 auto;
+}
+
+#buy-popup {
+    position: absolute;
+    background: #1e1e1e;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 180px;
+}
+
+#pct-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.pct-btn {
+    padding: 8px;
+    background: #2d2d2d;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pct-btn.selected {
+    background: #4a90d9;
+    border-color: #4a90d9;
+}
+
+#btn-confirm {
+    padding: 8px;
+    background: #2a7a2a;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#btn-confirm:disabled {
+    background: #444;
+    cursor: not-allowed;
+}
+
+#popup-close {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 16px;
+}

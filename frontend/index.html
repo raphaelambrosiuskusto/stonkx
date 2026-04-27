@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stonkx</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src = "/dist/app.js"></script>
+</head>
+<body>
+    <h1>data testing</h1>
+
+    <div id="chart-container">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <div id="price-box">Current price: <span id="current-price">—</span></div>
+    <div id="balance-box">Balance: <span id="balance">100,000.00</span></div>
+    <div id="position-box">Position: <span id="position">0.00</span> </div>
+    <div>
+        <button id="btn-start">Start</button>
+        <button id="btn-buy">Buy</button>
+        <button id="btn-sell">Sell</button>
+    </div>
+
+    <div id="buy-popup" style="display:none;">
+        <button id="popup-close">x</button>
+        <div id="pct-options">
+            <button class="pct-btn" data-pct="0.01">1%</button>
+            <button class="pct-btn" data-pct="0.05">5%</button>
+            <button class="pct-btn" data-pct="0.10">10%</button>
+            <button class="pct-btn" data-pct="0.25">25%</button>
+            <button class="pct-btn" data-pct="0.50">50%</button>
+            <button class="pct-btn" data-pct="1.00">100%</button>
+        </div>
+        <button id="btn-confirm" disabled>Confirm</button>
+    </div>
+
+</body>
+</html>

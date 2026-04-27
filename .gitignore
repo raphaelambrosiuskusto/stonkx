@@ -1,0 +1,11 @@
+/vendor/
+*.exe
+*.dll
+*.so
+*.dylib
+bin/
+.env
+backend/dbconfig.env
+backend/plan.md
+frontend/node_modules/
+frontend/dist/
