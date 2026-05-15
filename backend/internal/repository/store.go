@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"stonkx/internal/domain"
+	"stonkx/internal/shared"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -14,10 +15,6 @@ type Store struct {
 
 func New(pool *pgxpool.Pool) *Store {
 	return &Store{Pool: pool}
-}
-
-func (s *Store) Ready(ctx context.Context) error {
-	return s.Pool.Ping(ctx)
 }
 
 func (s *Store) GetSeries(ctx context.Context, tickerID int) (domain.SeriesEx, error) {
@@ -153,4 +150,27 @@ func (s *Store) WipeAllSeries(ctx context.Context) error {
 	}
 	defer rows.Close()
 	return nil
+}
+
+func (s *Store) ListTickerIDs(ctx context.Context) ([]int, error) {
+	rows, err := s.Pool.Query(ctx, listTickersAsc)
+	if err != nil {
+		return nil, fmt.Errorf("listing tickerID's: %w", err)
+	}
+	defer rows.Close()
+
+	ids := make([]string, 0, 16)
+	for rows.Next() {
+		var currentID string
+		if err := rows.Scan(&currentID); err != nil {
+			return nil, fmt.Errorf("reading ID from DB: %w", err)
+		}
+		ids = append(ids, currentID)
+	}
+
+	idlist, err := shared.Convert(ids)
+	if err != nil {
+		return nil, fmt.Errorf("converting ids(string) to idlist(int): %w", err)
+	}
+	return idlist, nil
 }

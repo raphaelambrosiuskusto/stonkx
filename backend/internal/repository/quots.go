@@ -14,6 +14,8 @@ type SeriesIm struct {
 	Quots []QuotIm
 }
 
+type IDList []int
+
 func (s *SeriesIm) AddRow(time, high, low, open, close int) {
 	s.Quots = append(s.Quots, QuotIm{time, high, low, open, close})
 }

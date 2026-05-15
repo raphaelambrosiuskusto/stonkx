@@ -7,15 +7,22 @@ import (
 type QuotsService interface {
 	//checks if Service is ready to serve
 	Serve(context.Context) error
+
+	Initiate(ctx context.Context) error
+
+	GetByID(context.Context, int) (SeriesEx, error)
+	GetRandom(context.Context) (SeriesEx, error)
 }
 
 // DB-reading handler
 type QuotsReader interface {
 	//pings an underlying DB; is intended to return nil in case of successful connection
 	Ready(context.Context) error
+	CreateTableByFile(context.Context, string) error
 
 	GetSeries(context.Context, int) (SeriesEx, error)
 	GetMaxTickerID(context.Context) (int, error)
+	ListTickerIDs(context.Context) ([]int, error)
 }
 
 // DB-writing handler

@@ -14,6 +14,7 @@ func NewUser(s *repository.Store) *UserService {
 		Store: s,
 	}
 }
+
 func (s *UserService) Serve(ctx context.Context) error {
 	return nil
 }

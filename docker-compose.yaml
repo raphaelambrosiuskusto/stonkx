@@ -26,6 +26,7 @@ services:
       DB_CONF_FULL: ${DB_CONF_FULL}
       DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable
       APP_ENV: production
+      MIGRATION_PATH: /repository/migrations/schema.sql
     expose:
       - "8080"
 

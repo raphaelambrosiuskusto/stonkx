@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	rand "math/rand/v2"
 	"stonkx/internal/domain"
 )
 
@@ -21,16 +22,26 @@ func NewQuots(reader domain.QuotsReader, writer domain.QuotsWriter) *QuotsServic
 	}
 }
 
-func (s *QuotsService) Serve(ctx context.Context) error {
-	return s.Reader.Ready(ctx)
-}
-
 func (s *QuotsService) GetByID(ctx context.Context, ID int) (domain.SeriesEx, error) {
 	series, err := s.Reader.GetSeries(ctx, ID)
 	if err != nil {
 		return domain.SeriesEx{}, fmt.Errorf("service: GetByID: %w", err)
 	}
 	return series, nil
+}
+
+func (s *QuotsService) GetRandom(ctx context.Context) (domain.SeriesEx, error) {
+	ids, err := s.Reader.ListTickerIDs(ctx)
+	if err != nil {
+		return domain.SeriesEx{}, fmt.Errorf("getrandom: %w", err)
+	}
+
+	series, err := s.Reader.GetSeries(ctx, ids[rand.IntN(len(ids))])
+	if err != nil {
+		return domain.SeriesEx{}, fmt.Errorf("reading series: %w", err)
+	}
+	return series, nil
+
 }
 
 func (s *QuotsService) Insert(ctx context.Context, chunk domain.SeriesEx) error {

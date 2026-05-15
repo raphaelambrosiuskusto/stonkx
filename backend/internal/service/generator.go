@@ -27,6 +27,14 @@ type series struct {
 	EMA    float64
 }
 
+func GenerateDefaultMultiple(amount int) []domain.SeriesEx {
+	chunk := make([]domain.SeriesEx, 0, amount)
+	for range amount {
+		chunk = append(chunk, GenerateDefault())
+	}
+	return chunk
+}
+
 func GenerateDefault() domain.SeriesEx {
 	return Generate(quotsPerSeriesGenFunc, rand.ExpFloat64(), rand.Float64())
 }
